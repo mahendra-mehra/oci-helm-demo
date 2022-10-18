@@ -91,7 +91,7 @@ steps:
     timeoutInSeconds: 1200
     name: "Build container image"
     command: |
-      cd ${OCI_WORKSPACE_DIR}
+      cd ${OCI_WORKSPACE_DIR}/node_express
       docker build --pull --rm -t iad-dop-lab15-1-ocir-1/node-service .
 
 outputArtifacts:
