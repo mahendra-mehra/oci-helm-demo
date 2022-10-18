@@ -64,7 +64,7 @@ steps:
     timeoutInSeconds: 1200
     name: "Run Tests"
     command: |
-      cd ${OCI_WORKSPACE_DIR}/tests
+      cd ${OCI_WORKSPACE_DIR}
       npm test
 
   - type: Command
