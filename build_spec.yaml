@@ -60,12 +60,12 @@ steps:
         timeoutInSeconds: 40
         runAs: root
 
-  - type: Command
-    timeoutInSeconds: 1200
-    name: "Run Tests"
-    command: |
-      cd ${OCI_WORKSPACE_DIR}
-      npm test
+  #- type: Command
+    #timeoutInSeconds: 1200
+    #name: "Run Tests"
+    #command: |
+      #cd ${OCI_WORKSPACE_DIR}
+      #npm test
 
   - type: Command
     timeoutInSeconds: 1200
