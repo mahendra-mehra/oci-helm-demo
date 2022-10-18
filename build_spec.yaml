@@ -29,7 +29,7 @@ steps:
     timeoutInSeconds: 600
     name: "Install Node Prereqs"
     command: |
-      cd ${OCI_WORKSPACE_DIR}/node_express
+      cd ${OCI_WORKSPACE_DIR}
       # install nvm
       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
       export NVM_DIR="$HOME/.nvm"
@@ -50,7 +50,7 @@ steps:
     timeoutInSeconds: 600
     name: "NPM install"
     command: |
-      cd ${OCI_WORKSPACE_DIR}/node_express
+      cd ${OCI_WORKSPACE_DIR}
       npm install
     onFailure:
       - type: Command
@@ -64,14 +64,14 @@ steps:
     timeoutInSeconds: 1200
     name: "Run Tests"
     command: |
-      cd ${OCI_WORKSPACE_DIR}/node_express
+      cd ${OCI_WORKSPACE_DIR}
       npm test
 
   - type: Command
     timeoutInSeconds: 1200
     name: "Helm Build"
     command: |
-      cd ${OCI_WORKSPACE_DIR}/node_express/helm/node-service
+      cd ${OCI_WORKSPACE_DIR}/helm/node-service
       export BUILDRUN_HASH=${BUILDRUN_HASH}
       originalChartfile="Chart.yaml"
       tmpChartfile=$(mktemp)
@@ -86,12 +86,12 @@ steps:
     timeoutInSeconds: 1200
     name: "Build container image"
     command: |
-      cd ${OCI_WORKSPACE_DIR}/node_express
-      docker build --pull --rm -t node-express-getting-starter .
+      cd ${OCI_WORKSPACE_DIR}
+      docker build --pull --rm -t iad-dop-lab15-1-ocir-1/node-service .
 
 outputArtifacts:
   - name: APPLICATION_DOCKER_IMAGE
     type: DOCKER_IMAGE
     # this location tag doesn't effect the tag used to deliver the container image
     # to the Container Registry
-    location: node-express-getting-starter:latest
+    location: iad-dop-lab15-1-ocir-1/node-service:latest
